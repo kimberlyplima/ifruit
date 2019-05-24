@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,14 +23,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> imageNames = new ArrayList<>();
-    private ArrayList<String> images = new ArrayList<>();
+    private ArrayList<Produto> listaProdutosLoja;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<String> imageNames, ArrayList<String> images) {
-        this.imageNames = imageNames;
-        this.images = images;
+    public RecyclerViewAdapter(Context mContext, ArrayList<Produto> listaProdutosLoja) {
         this.mContext = mContext;
+        this.listaProdutosLoja = listaProdutosLoja;
     }
 
     @NonNull
@@ -46,17 +45,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(images.get(position))
+                .load(listaProdutosLoja.get(position).getUrlImagemProduto())
                 .into(holder.image);
 
-        holder.imageName.setText(imageNames.get(position));
+        holder.imageName.setText(listaProdutosLoja.get(position).getTextoProduto());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"Clicked on: " + imageNames.get(position));
+                Toast.makeText(mContext, listaProdutosLoja.get(position).getTextoProduto(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                Toast.makeText(mContext, imageNames.get(position), Toast.LENGTH_SHORT).show();
+        holder.btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mContext instanceof ContaLogadaActivity){
+                    Toast.makeText(mContext, "Produto " + listaProdutosLoja.get(position).getTextoProduto() + " adicionado ao carrinho", Toast.LENGTH_SHORT).show();
+                    ((ContaLogadaActivity) mContext).adicionarProdutoCarrinho(listaProdutosLoja.get(position));
+                }
             }
         });
 
@@ -64,7 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return imageNames.size();
+        return listaProdutosLoja.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -72,12 +79,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         CircleImageView image;
         TextView imageName;
         RelativeLayout parentLayout;
+        Button btnAddCart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             imageName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
+            btnAddCart = itemView.findViewById(R.id.btn_add_cart);
         }
     }
 }
