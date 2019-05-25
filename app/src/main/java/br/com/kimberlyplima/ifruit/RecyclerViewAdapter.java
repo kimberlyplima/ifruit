@@ -1,7 +1,6 @@
 package br.com.kimberlyplima.ifruit;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,7 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Log.d(TAG,"onBindViewHolder called.");
 
         Glide.with(mContext)
@@ -60,9 +59,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mContext instanceof ContaLogadaActivity){
+                if(mContext instanceof LojaVirtualActivity){
                     Toast.makeText(mContext, "Produto " + listaProdutosLoja.get(position).getTextoProduto() + " adicionado ao carrinho", Toast.LENGTH_SHORT).show();
-                    ((ContaLogadaActivity) mContext).adicionarProdutoCarrinho(listaProdutosLoja.get(position));
+                    ((LojaVirtualActivity) mContext).adicionarProdutoCarrinho(listaProdutosLoja.get(position));
+                    holder.btnAddCart.setEnabled(false);
                 }
             }
         });

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,16 +24,18 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCadastro;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
+    private TextView recuperarSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtSenha = (EditText) findViewById(R.id.txt_senha);
-        txtEmail = (EditText) findViewById(R.id.txt_email);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnCadastro = (Button) findViewById(R.id.btn_cadastro);
+        txtSenha = findViewById(R.id.txt_senha);
+        txtEmail = findViewById(R.id.txt_email);
+        btnLogin = findViewById(R.id.btn_login);
+        btnCadastro = findViewById(R.id.btn_cadastro);
+        recuperarSenha = findViewById(R.id.recuperar_senha);
 
         auth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -41,12 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if(firebaseAuth.getCurrentUser() != null){
                     // Descomentar a linha de baixo para aproveitar a sessao logada do usuario
-                   // startActivity(new Intent(MainActivity.this , ContaLogadaActivity.class));
+//                    startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
                 }
 
             }
         };
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CadastroActivity.class));
             }
         });
+    }
+
+    public void recuperarSenha(View v){
+//        startActivity(new Intent(MainActivity.this, RecuperarSenhaActivity.class));
     }
 
     @Override
@@ -81,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(MainActivity.this , ContaLogadaActivity.class));
+                        startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
                     } else {
                         Toast.makeText(MainActivity.this, "E-mail ou senha incorretos", Toast.LENGTH_LONG).show();
                     }

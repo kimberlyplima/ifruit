@@ -32,4 +32,5 @@
         android:layout_marginEnd="21dp"
         android:layout_toEndOf="@+id/image_name"
         android:text="Adicionar" />
+
 </RelativeLayout>

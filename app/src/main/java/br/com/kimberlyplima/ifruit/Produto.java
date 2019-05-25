@@ -5,6 +5,15 @@ public class Produto {
     private int quantidadeProduto;
     private int valorProduto;
     private String urlImagemProduto;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUrlImagemProduto() {
         return urlImagemProduto;
