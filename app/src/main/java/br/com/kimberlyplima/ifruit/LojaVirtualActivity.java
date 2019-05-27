@@ -1,6 +1,7 @@
 package br.com.kimberlyplima.ifruit;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class LojaVirtualActivity extends AppCompatActivity {
 
@@ -39,7 +42,9 @@ public class LojaVirtualActivity extends AppCompatActivity {
         buttonRedirecionarCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LojaVirtualActivity.this , CarrinhoDeComprasActivity.class));
+                Intent intent = new Intent(LojaVirtualActivity.this , CarrinhoDeComprasActivity.class);
+                intent.putParcelableArrayListExtra("carrinhoEstadoAtual",carrinhoComprasUsuario);
+                startActivity(intent);
             }
         });
 

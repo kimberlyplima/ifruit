@@ -1,6 +1,9 @@
 package br.com.kimberlyplima.ifruit;
 
-public class Produto {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Produto implements Parcelable {
     private String textoProduto;
     private int quantidadeProduto;
     private int valorProduto;
@@ -45,5 +48,19 @@ public class Produto {
 
     public void setValorProduto(int valorProduto) {
         this.valorProduto = valorProduto;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(valorProduto);
+        dest.writeString(textoProduto);
+        dest.writeInt(quantidadeProduto);
+        dest.writeString(urlImagemProduto);
+        dest.writeInt(id);
     }
 }
