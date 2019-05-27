@@ -1,10 +1,14 @@
 package br.com.kimberlyplima.ifruit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -18,6 +22,8 @@ public class LojaVirtualActivity extends AppCompatActivity {
     private ArrayList<Produto> carrinhoComprasUsuario = new ArrayList<>();
     // public static ArrayList<Produto> carrinhoComprasUsuario = new ArrayList<>();
     //ver a possibilidade do carrinho ser static para ser acessado por todas as activities!!!!!!
+    private ImageButton buttonRedirecionarCarrinho;
+    private ImageButton buttonRedirecionarPerfilUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,21 @@ public class LojaVirtualActivity extends AppCompatActivity {
         iniciarLoja();
 
         //colocar aqui o on click listener do botao que direciona para o carrinho de compras, passando o atual carrinhoComprasUsuario:
+        buttonRedirecionarCarrinho = findViewById(R.id.imageButtonCarrinho);
+        buttonRedirecionarCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LojaVirtualActivity.this , CarrinhoDeComprasActivity.class));
+            }
+        });
 
+        buttonRedirecionarPerfilUsuario = findViewById(R.id.imageButtonPerfil);
+        buttonRedirecionarPerfilUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LojaVirtualActivity.this , PerfilUsuarioActivity.class));
+            }
+        });
     }
 
     private void iniciarLoja() {

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(firebaseAuth.getCurrentUser() != null){
                     // Descomentar a linha de baixo para aproveitar a sessao logada do usuario
-//                    startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
+                    startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
                 }
 
             }
