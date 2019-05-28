@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".CarrinhoDeComprasActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="410dp"
+        android:layout_height="553dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="69dp"></android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="359dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/colorButton"
+        android:text="Finalizar"
+        android:textColor="@color/colorText"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonCarrinho"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageButton
         android:id="@+id/imageButtonHome"
         android:layout_width="139dp"
