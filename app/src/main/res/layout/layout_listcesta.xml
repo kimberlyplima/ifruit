@@ -3,48 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:padding="15dp"
-    android:id="@+id/parent_layout">
+    android:id="@+id/parent_layout_carrinho">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/image"
+        android:src="@mipmap/ic_launcher"/>
 
     <TextView
-        android:id="@+id/image_combo"
-        android:layout_width="143dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="30dp"
+        android:id="@+id/descricao_combo"
+        android:layout_width="66dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="34dp"
         android:layout_toRightOf="@+id/image"
         android:text="Combo 1"
-        android:textColor="#000"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/image_fruits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/image_combo"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="230dp"
-        android:layout_toRightOf="@+id/image"
-        android:text="Maça, banana, laranja"
         android:textColor="#000"
         android:textSize="10sp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imagePlus"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="49dp"
-        android:layout_toStartOf="@+id/imageButton2"
+        android:layout_toStartOf="@+id/imageMinus"
         app:srcCompat="@drawable/mais" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageMinus"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
@@ -52,5 +40,15 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="32dp"
         app:srcCompat="@drawable/menos" />
+
+    <TextView
+        android:id="@+id/quantidade"
+        android:layout_width="43dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="-105dp"
+        android:layout_marginRight="-6dp"
+        android:layout_toStartOf="@+id/imagePlus"
+        android:layout_toLeftOf="@+id/imageMinus"
+        android:text="Qtd" />
 
 </RelativeLayout>

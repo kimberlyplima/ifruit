@@ -69,6 +69,7 @@ public class LojaVirtualActivity extends AppCompatActivity {
     }
 
     private void iniciarLoja() {
+        //quantidade sempre 1 na loja virtual!
         int cont = 0;
         Produto produto;
         produto = new Produto("Macas",1,60,
@@ -79,7 +80,7 @@ public class LojaVirtualActivity extends AppCompatActivity {
                 "https://i.imgur.com/ZcLLrkY.jpg",cont++);
         listaProdutosLoja.add(produto);
 
-        produto = new Produto("Teste",1,80,
+        produto = new Produto("Jaboticaba",1,80,
                 "https://i.imgur.com/ZcLLrkY.jpg",cont++);
         listaProdutosLoja.add(produto);
 

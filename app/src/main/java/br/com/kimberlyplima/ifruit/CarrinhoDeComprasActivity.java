@@ -3,6 +3,10 @@ package br.com.kimberlyplima.ifruit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import java.lang.reflect.Array;
 import java.time.Clock;
@@ -11,7 +15,8 @@ import java.util.Arrays;
 
 public class CarrinhoDeComprasActivity extends AppCompatActivity {
 
-    private ArrayList<Produto> carrinhoAtualUsuario;
+    private ArrayList<Produto> carrinhoAtualUsuario = new ArrayList<>();
+    Button btnFinalizarCompra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,29 +26,37 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
         System.out.println("Carrinho que chegou "+carrinhoString);
 
         String[] array = carrinhoString.split("</produto>");
+        for (String s : array) {
+            if(!s.equals("".trim())){
+                String[] arrayAux = s.split("<separacao>");
+
+                System.out.println("aaaa " + arrayAux[0] + arrayAux[1] + arrayAux[2] + arrayAux[3] + arrayAux[4]);
+
+                carrinhoAtualUsuario.add(new Produto(arrayAux[1],Integer.parseInt(arrayAux[2]), Integer.parseInt(arrayAux[4]), arrayAux[3], Integer.parseInt(arrayAux[0]) ));
+            }
+        }
+
+        btnFinalizarCompra = findViewById(R.id.btn_finalizar_compra);
+        btnFinalizarCompra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalizarCompra();
+            }
+        });
 
 
 
-        System.out.println("array 0 : "+array[0]);
-        System.out.println("array 0 : "+array[1]);
-        System.out.println("array 0 : "+array[2]);
+        initRecyclerView();
+    }
 
-        String[] array2 = array[0].split("<separacao>");
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerViewAdapterCarrinhoCompras adapter = new RecyclerViewAdapterCarrinhoCompras(this,carrinhoAtualUsuario);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        String[] array3 = array[1].split("<separacao>");
+    private void finalizarCompra(){
 
-        System.out.println("array2 0 : " + array2[0]);
-
-        System.out.println("array3[1] : " + array3[1]);
-//        System.out.println("array2 1 : "+array2[1]);
-//        System.out.println("array2 2 : "+array2[2]);
-//        System.out.println("array2 3 : "+array2[3]);
-//        System.out.println("array2 4 : "+array2[4]);
-
-
-
-//        for (Produto p: carrinhoAtualUsuario) {
-//            System.out.println("produto aqui Carrinho: "+ p.getTextoProduto() + p.getQuantidadeProduto());
-//        }
     }
 }
