@@ -1,6 +1,7 @@
 package br.com.kimberlyplima.ifruit;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
@@ -21,10 +23,11 @@ public class LojaVirtualActivity extends AppCompatActivity {
 
 //    private ArrayList<String> imageNames = new ArrayList<>();
 //    private ArrayList<String> imageUrls = new ArrayList<>();
-    private ArrayList<Produto> listaProdutosLoja = new ArrayList<>();
-    private ArrayList<Produto> carrinhoComprasUsuario = new ArrayList<>();
     // public static ArrayList<Produto> carrinhoComprasUsuario = new ArrayList<>();
     //ver a possibilidade do carrinho ser static para ser acessado por todas as activities!!!!!!
+
+    private ArrayList<Produto> listaProdutosLoja = new ArrayList<>();
+    private ArrayList<Produto> carrinhoComprasUsuario = new ArrayList<>();
     private ImageButton buttonRedirecionarCarrinho;
     private ImageButton buttonRedirecionarPerfilUsuario;
 
@@ -43,7 +46,7 @@ public class LojaVirtualActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LojaVirtualActivity.this , CarrinhoDeComprasActivity.class);
-                intent.putParcelableArrayListExtra("carrinhoEstadoAtual",carrinhoComprasUsuario);
+                intent.putExtra("carrinhoEstadoAtual", customStringify(carrinhoComprasUsuario));
                 startActivity(intent);
             }
         });
@@ -57,78 +60,27 @@ public class LojaVirtualActivity extends AppCompatActivity {
         });
     }
 
+    private String customStringify(ArrayList<Produto> carrinhoComprasUsuario) {
+        String sb = "";
+        for (Produto p: carrinhoComprasUsuario) {
+            sb += p.getId() + "<separacao>" + p.getTextoProduto() + "<separacao>" + p.getQuantidadeProduto() + "<separacao>" + p.getUrlImagemProduto() + "<separacao>" + p.getValorProduto()+"</produto>";
+        }
+        return sb;
+    }
+
     private void iniciarLoja() {
         int cont = 0;
-        Produto produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("Bananas");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
+        Produto produto;
+        produto = new Produto("Macas",1,60,
+                "https://i.imgur.com/ZcLLrkY.jpg",cont++);
         listaProdutosLoja.add(produto);
 
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("Maçãs");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
+        produto = new Produto("Bananas",1,90,
+                "https://i.imgur.com/ZcLLrkY.jpg",cont++);
         listaProdutosLoja.add(produto);
 
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("14");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
-        listaProdutosLoja.add(produto);
-
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("12");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
-        listaProdutosLoja.add(produto);
-
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("1");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
-        listaProdutosLoja.add(produto);
-
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("2");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
-        listaProdutosLoja.add(produto);
-
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("3");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
-        listaProdutosLoja.add(produto);
-
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("4");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
-        listaProdutosLoja.add(produto);
-
-        produto = new Produto();
-        produto.setQuantidadeProduto(1);
-        produto.setTextoProduto("5");
-        produto.setValorProduto(60);
-        produto.setUrlImagemProduto("https://i.imgur.com/ZcLLrkY.jpg");
-        produto.setId(cont++);
+        produto = new Produto("Teste",1,80,
+                "https://i.imgur.com/ZcLLrkY.jpg",cont++);
         listaProdutosLoja.add(produto);
 
 
@@ -154,6 +106,7 @@ public class LojaVirtualActivity extends AppCompatActivity {
     }
 
     public void adicionarProdutoCarrinho(Produto produtoAdicionarCarrinho){
+        System.out.println("Produto adicionado : "+ produtoAdicionarCarrinho.getTextoProduto() + " quantidade : " + produtoAdicionarCarrinho.getQuantidadeProduto());
         carrinhoComprasUsuario.add(produtoAdicionarCarrinho);
     }
 }
