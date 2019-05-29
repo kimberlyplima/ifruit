@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(firebaseAuth.getCurrentUser() != null){
                     // Descomentar a linha de baixo para aproveitar a sessao logada do usuario
-                    //startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
+//                    startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
                 }
 
             }
@@ -70,10 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ResetarSenha.class));
             }
         });
-    }
-
-    public void recuperarSenha(View v){
-//        startActivity(new Intent(MainActivity.this, RecuperarSenhaActivity.class));
     }
 
     @Override

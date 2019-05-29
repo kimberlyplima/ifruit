@@ -15,6 +15,7 @@
         <activity android:name=".CarrinhoDeComprasActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".LojaVirtualActivity" />
+        <activity android:name=".ResetarSenha" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
