@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,6 +51,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.imageName.setText(listaProdutosLoja.get(position).getTextoProduto());
 
+        holder.textoValor.setText("R$: "+listaProdutosLoja.get(position).getValorProduto()+",00");
+
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView imageName;
         RelativeLayout parentLayout;
         Button btnAddCart;
+        TextView textoValor;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,6 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
             btnAddCart = itemView.findViewById(R.id.btn_add_cart);
+            textoValor = itemView.findViewById(R.id.texto_valor);
         }
     }
 }

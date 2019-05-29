@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.lang.reflect.Array;
 import java.time.Clock;
@@ -17,6 +18,7 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
 
     private ArrayList<Produto> carrinhoAtualUsuario = new ArrayList<>();
     Button btnFinalizarCompra;
+    ImageButton btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,26 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
             }
         });
 
+        btnHome = findViewById(R.id.imageButtonHome);
 
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CarrinhoDeComprasActivity.this , LojaVirtualActivity.class));
+            }
+        });
 
         initRecyclerView();
     }
 
+    public void aumentarQuantidadeProduto(Produto p){
+        System.out.println("entrou produto p ;:" + p.getTextoProduto() + "qtd : " + p.getQuantidadeProduto());
+        p.setQuantidadeProduto(p.getQuantidadeProduto() + 1);
+    }
+
+    public void diminuirQuantidadeProduto(Produto p){
+        p.setQuantidadeProduto(p.getQuantidadeProduto() - 1);
+    }
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapterCarrinhoCompras adapter = new RecyclerViewAdapterCarrinhoCompras(this,carrinhoAtualUsuario);

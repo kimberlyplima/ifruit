@@ -51,6 +51,8 @@ public class RecyclerViewAdapterCarrinhoCompras extends RecyclerView.Adapter<Rec
 
         holder.quantidade.setText(carrinhoComprasUsuario.get(position).getQuantidadeProduto() + "");
 
+        holder.valorTotal.setText("R$: " + carrinhoComprasUsuario.get(position).getValorProduto() * carrinhoComprasUsuario.get(position).getQuantidadeProduto() +",00" );
+
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +60,27 @@ public class RecyclerViewAdapterCarrinhoCompras extends RecyclerView.Adapter<Rec
             }
         });
 
+        holder.imagePlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mContext instanceof CarrinhoDeComprasActivity){
+                    ((CarrinhoDeComprasActivity) mContext).aumentarQuantidadeProduto(carrinhoComprasUsuario.get(position));
+                    holder.quantidade.setText(carrinhoComprasUsuario.get(position).getQuantidadeProduto()+"");
+                    holder.valorTotal.setText("R$: " + carrinhoComprasUsuario.get(position).getValorProduto()*carrinhoComprasUsuario.get(position).getQuantidadeProduto()+",00" );
+                }
+            }
+        });
 
+        holder.imageMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mContext instanceof CarrinhoDeComprasActivity){
+                    ((CarrinhoDeComprasActivity) mContext).diminuirQuantidadeProduto(carrinhoComprasUsuario.get(position));
+                    holder.quantidade.setText(carrinhoComprasUsuario.get(position).getQuantidadeProduto()+"");
+                    holder.valorTotal.setText("R$: " + carrinhoComprasUsuario.get(position).getValorProduto()*carrinhoComprasUsuario.get(position).getQuantidadeProduto()+",00" );
+                }
+            }
+        });
 
     }
 
@@ -75,6 +97,7 @@ public class RecyclerViewAdapterCarrinhoCompras extends RecyclerView.Adapter<Rec
         ImageView imagePlus;
         ImageView imageMinus;
         TextView quantidade;
+        TextView valorTotal;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +107,7 @@ public class RecyclerViewAdapterCarrinhoCompras extends RecyclerView.Adapter<Rec
             image = itemView.findViewById(R.id.image);
             descricaoCombo = itemView.findViewById(R.id.descricao_combo);
             parentLayout = itemView.findViewById(R.id.parent_layout_carrinho);
+            valorTotal = itemView.findViewById(R.id.valor_total);
         }
     }
 }

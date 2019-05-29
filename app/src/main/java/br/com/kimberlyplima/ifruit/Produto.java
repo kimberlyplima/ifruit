@@ -51,7 +51,12 @@ public class Produto{
     }
 
     public void setQuantidadeProduto(int quantidadeProduto) {
-        this.quantidadeProduto = quantidadeProduto;
+        if(quantidadeProduto >= 1){
+            this.quantidadeProduto = quantidadeProduto;
+        } else {
+            // Verificar se precisa lançar exceção
+            System.out.println("Valor deve ser positivo!");
+        }
     }
 
     public int getValorProduto() {

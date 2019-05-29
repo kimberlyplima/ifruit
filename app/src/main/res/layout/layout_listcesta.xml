@@ -13,14 +13,13 @@
 
     <TextView
         android:id="@+id/descricao_combo"
-        android:layout_width="wrap_content"
-        android:layout_height="76dp"
-        android:layout_marginLeft="34dp"
+        android:layout_width="92dp"
+        android:layout_height="39dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/image"
         android:text="Combo 1"
         android:textColor="#000"
         android:textSize="18sp" />
-
 
 
     <ImageButton
@@ -29,7 +28,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="60dp"
         android:layout_toStartOf="@+id/imagePlus"
         app:srcCompat="@drawable/menos" />
 
@@ -40,17 +39,29 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="5dp"
         app:srcCompat="@drawable/mais" />
 
     <TextView
         android:id="@+id/quantidade"
-        android:layout_width="32dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="-82dp"
+        android:layout_width="40dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="-110dp"
         android:layout_marginRight="0dp"
         android:layout_toStartOf="@+id/imageMinus"
         android:layout_toLeftOf="@+id/imagePlus"
-        android:text="Qtd" />
+        android:text="Qtd"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/valor_total"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="60dp"
+        android:layout_toRightOf="@+id/image"
+        android:text="Valor:"
+
+        />
 
 </RelativeLayout>
