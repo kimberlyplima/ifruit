@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.lang.reflect.Array;
 import java.time.Clock;
 import java.util.ArrayList;
@@ -19,11 +23,14 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
     private ArrayList<Produto> carrinhoAtualUsuario = new ArrayList<>();
     Button btnFinalizarCompra;
     ImageButton btnHome;
+    DatabaseReference referenciaBD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrinho_de_compras);
+
+
         String carrinhoString = getIntent().getStringExtra("carrinhoEstadoAtual");
         System.out.println("Carrinho que chegou "+carrinhoString);
 
@@ -54,8 +61,10 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
                 startActivity(new Intent(CarrinhoDeComprasActivity.this , LojaVirtualActivity.class));
             }
         });
-
         initRecyclerView();
+
+
+        referenciaBD = FirebaseDatabase.getInstance().getReference();
     }
 
     public void aumentarQuantidadeProduto(Produto p){
@@ -74,6 +83,6 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
     }
 
     private void finalizarCompra(){
-
+        referenciaBD.setValue(carrinhoAtualUsuario);
     }
 }
