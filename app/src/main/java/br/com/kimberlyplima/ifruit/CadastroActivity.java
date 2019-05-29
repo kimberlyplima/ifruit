@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -53,7 +54,23 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
-    private void cadastrarUsuario(String email , String senha){
+    private void cadastrarUsuario(final String email , final String senha){
+        mAuth.fetchSignInMethodsForEmail(txtEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                boolean check = !task.getResult().getSignInMethods().isEmpty();
+                if(!check){
+                    confirmarCadastro(email, senha);
+                } else {
+                    Toast.makeText(CadastroActivity.this, "E-mail já cadastrado" , Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+    }
+
+    private void confirmarCadastro(String email , String senha) {
         mAuth.createUserWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
