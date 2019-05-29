@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(firebaseAuth.getCurrentUser() != null){
                     // Descomentar a linha de baixo para aproveitar a sessao logada do usuario
-                    startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
+                    //startActivity(new Intent(MainActivity.this , LojaVirtualActivity.class));
                 }
 
             }
@@ -61,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CadastroActivity.class));
+            }
+        });
+
+        recuperarSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ResetarSenha.class));
             }
         });
     }
