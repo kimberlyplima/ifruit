@@ -22,8 +22,8 @@ public class ResetarSenha extends AppCompatActivity {
     private Button btnResetarSenha;
     FirebaseAuth firebaseAuth;
     TextView txtEmail;
-    TextView txtSenha2;
-    TextView txtSenha1;
+//    TextView txtSenha2;
+//    TextView txtSenha1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class ResetarSenha extends AppCompatActivity {
         btnResetarSenha = findViewById(R.id.btn_reset_pwd);
 
         txtEmail = findViewById(R.id.txt_email_reset_pwd);
-        txtSenha1 = findViewById(R.id.txt_pwd_first);
-        txtSenha2 = findViewById(R.id.txt_pwd_confirm);
+//        txtSenha1 = findViewById(R.id.txt_pwd_first);
+//        txtSenha2 = findViewById(R.id.txt_pwd_confirm);
 
 
         btnResetarSenha.setOnClickListener(new View.OnClickListener() {
@@ -56,31 +56,42 @@ public class ResetarSenha extends AppCompatActivity {
                 if(!check){
                     Toast.makeText(ResetarSenha.this, "E-mail inexistente na base" , Toast.LENGTH_LONG).show();
                 } else {
-                    recuperarSenha(txtEmail.getText().toString(), txtSenha1.getText().toString(), txtSenha2.getText().toString());
+                    recuperarSenha(txtEmail.getText().toString());
                 }
             }
         });
     }
 
-    private void recuperarSenha(String email, String senha1, String senha2) {
-        if(!senha1.equals(senha2)){
-            Toast.makeText(ResetarSenha.this, "As senhas não conferem" , Toast.LENGTH_LONG).show();
-            return;
-        } else {
+    private void recuperarSenha(String email) {
+//        if(!senha1.equals(senha2)){
+//            Toast.makeText(ResetarSenha.this, "As senhas não conferem" , Toast.LENGTH_LONG).show();
+//            return;
+//        } else {
             FirebaseUser user = firebaseAuth.getCurrentUser();
-            user.updatePassword(senha1).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            user.updatePassword(senha1).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Void> task) {
+//                    if(task.isSuccessful()){
+//                        Toast.makeText(ResetarSenha.this, "Senha alterada com sucesso!" , Toast.LENGTH_LONG).show();
+//                        startActivity(new Intent(ResetarSenha.this, MainActivity.class));
+//                    }
+//                    else{
+//                        Toast.makeText(ResetarSenha.this, "Erro ao alterar a senha..." , Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            });
+            firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(ResetarSenha.this, "Senha alterada com sucesso!" , Toast.LENGTH_LONG).show();
+                        Toast.makeText(ResetarSenha.this, "Siga as instruções enviadas ao seu e-mail!" , Toast.LENGTH_LONG).show();
                         startActivity(new Intent(ResetarSenha.this, MainActivity.class));
-                    }
-                    else{
-                        Toast.makeText(ResetarSenha.this, "Erro ao alterar a senha..." , Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(ResetarSenha.this, "Erro ao recuperar a senha..." , Toast.LENGTH_LONG).show();
                     }
                 }
             });
 
         }
-    }
+//    }
 }
