@@ -64,7 +64,7 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
         initRecyclerView();
 
 
-        referenciaBD = FirebaseDatabase.getInstance().getReference("carrinhos");
+        //referenciaBD = FirebaseDatabase.getInstance().getReference("carrinhos");
     }
 
     public void aumentarQuantidadeProduto(Produto p){
